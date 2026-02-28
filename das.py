@@ -8,3 +8,6 @@ print("Checking for dataset...")
 path = kagglehub.dataset_download("mazenramadan/imdb-most-popular-films-and-series")
 csv_path = os.path.join(path, "imdb.csv")
 df = pd.read_csv(csv_path)
+
+# แสดงชื่อคอลัมน์เพื่อความมั่นใจ
+print("Current Columns:", df.columns.tolist())
