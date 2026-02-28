@@ -11,3 +11,9 @@ df = pd.read_csv(csv_path)
 
 # แสดงชื่อคอลัมน์เพื่อความมั่นใจ
 print("Current Columns:", df.columns.tolist())
+
+df = df.rename(columns={
+    'Rate': 'Rating',
+    'Date': 'Year',
+    'Name': 'Title'
+})
