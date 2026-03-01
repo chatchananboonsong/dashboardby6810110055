@@ -58,3 +58,12 @@ app.layout = html.Div([
      Output('graph-3', 'figure')],
     [Input('cert-dropdown', 'value')]
 )
+
+def update_charts(selected_cert):
+    # 1. กรองข้อมูลตามที่ผู้ใช้เลือก
+    filtered_df = df[df['Certificate'] == selected_cert]
+    
+    # 2. สร้างกราฟที่ 1: Histogram (ดูการกระจายของคะแนน)
+    fig1 = px.histogram(filtered_df, x="Rating", title="การกระจายของคะแนนรีวิว",
+                        template="plotly_dark", color_discrete_sequence=['#f3ce13'])
+    return fig1
