@@ -66,7 +66,11 @@ def update_charts(selected_cert):
     # 2. สร้างกราฟที่ 1: Histogram (ดูการกระจายของคะแนน)
     fig1 = px.histogram(filtered_df, x="Rating", title="การกระจายของคะแนนรีวิว",
                         template="plotly_dark", color_discrete_sequence=['#f3ce13'])
-    return fig1
+    # 3. สร้างกราฟที่ 2: Scatter (ดูคะแนนตามปีที่ฉาย)
+    fig2 = px.scatter(filtered_df, x="Year", y="Rating", hover_name="Title",
+                      title="คะแนนรีวิวในแต่ละปี", template="plotly_dark")
+    
+    return fig1,fig2
 
 if __name__ == '__main__':
     app.run(debug=True)
