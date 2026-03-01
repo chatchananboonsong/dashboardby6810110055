@@ -4,14 +4,10 @@ import plotly.express as px
 import kagglehub
 import os
 
-# 1. โหลดข้อมูล
-print("Checking for dataset...")
+# 1. โหลดข้อมูลจาก Kaggle
 path = kagglehub.dataset_download("mazenramadan/imdb-most-popular-films-and-series")
 csv_path = os.path.join(path, "imdb.csv")
 df = pd.read_csv(csv_path)
-
-# แสดงชื่อคอลัมน์เพื่อความมั่นใจ
-print("Current Columns:", df.columns.tolist())
 
 df = df.rename(columns={
     'Rate': 'Rating',
@@ -31,7 +27,7 @@ app = Dash(__name__)
 
 # ออกแบบหน้าตาเว็บ
 app.layout = html.Div([
-    html.H1("🎬 IMDB Movie Dashboard", style={'textAlign': 'center', 'color': '#f3ce13'}),
+    html.H1("IMDB Movie Dashboard", style={'textAlign': 'center', 'color': '#f3ce13'}),
     
     # ส่วนตัวเลือก (Dropdown)
     html.Div([
