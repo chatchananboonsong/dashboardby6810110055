@@ -20,33 +20,33 @@ df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
 
 df = df.dropna(subset=['Rating', 'Year', 'Certificate', 'Genre'])
 
-import plotly.express as px # เพิ่ม import ตัวนี้ที่ด้านบนสุดของไฟล์ด้วยครับ
-
-# สร้างตัวแอป Dash
 app = Dash(__name__)
 
-# ออกแบบหน้าตาเว็บ
+# ออกแบบโครงสร้างหน้าเว็บ (Layout)
 app.layout = html.Div([
-    html.H1("IMDB Movie Dashboard", style={'textAlign': 'center', 'color': '#f3ce13'}),
+    # ส่วนหัว (Header)
+    html.H1("🎬 IMDB Movie Dashboard", 
+            style={'textAlign': 'center', 'color': '#f3ce13', 'padding': '20px'}),
     
-    # ส่วนตัวเลือก (Dropdown)
+    # ส่วนตัวเลือก (Dropdown Filter)
     html.Div([
-        html.Label("เลือกกลุ่มผู้ชม (Certificate):", style={'color': 'white'}),
+        html.Label("เลือกเรตหนัง (Certificate):", style={'color': 'white'}),
         dcc.Dropdown(
             id='cert-dropdown',
             options=[{'label': i, 'value': i} for i in sorted(df['Certificate'].unique())],
-            value='PG-13', # ค่าเริ่มต้นที่ให้แสดง
+            value='PG-13', # ค่าเริ่มต้น
             style={'color': 'black'}
         ),
     ], style={'width': '40%', 'margin': 'auto', 'padding': '20px'}),
-# ส่วนพื้นที่แสดงกราฟ 3 ตัว
+
+    # ส่วนพื้นที่วางกราฟ (Graph Container)
     html.Div([
-        dcc.Graph(id='graph-1'), # กราฟกระจายตัวของคะแนน
-        dcc.Graph(id='graph-2'), # กราฟเทรนด์ตามปี
-        dcc.Graph(id='graph-3'), # กราฟแท่งจัดอันดับประเภทหนัง
+        dcc.Graph(id='rating-hist'),  # กราฟความถี่คะแนน
+        dcc.Graph(id='year-scatter'), # กราฟเทรนด์ตามปี
+        dcc.Graph(id='genre-bar'),    # กราฟแท่งประเภทหนัง
     ], style={'padding': '20px'})
 
-], style={'backgroundColor': '#1a1a1a', 'minHeight': '100vh'})
+], style={'backgroundColor': '#1a1a1a', 'minHeight': '100vh'}) # พื้นหลังสีดำเข้ม
 
 @app.callback(
     [Output('graph-1', 'figure'),
