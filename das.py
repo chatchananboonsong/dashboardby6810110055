@@ -41,7 +41,13 @@ app.layout = html.Div([
         ]),
         dcc.Graph(id='graph-3', style={'width': '100%'}),
     ], style={'padding': '20px'})
-], style={'backgroundColor': '#1a1a1a', 'minHeight': '100vh'})
+], style={
+    'backgroundColor': "#000000", 
+    'minHeight': '100vh',  # คลุมทั้งหน้าจอ
+    'margin': '-8px',      # ลบขอบขาวของ Browser
+    'padding': '0',        # มั่นใจว่าไม่มี padding ด้านนอกสุด
+    'overflowX': 'hidden'  # ป้องกันแถบเลื่อนแนวนอนโผล่
+})
 
 # 4. ส่วน Callback (หัวใจการทำงาน)
 @app.callback(
@@ -58,7 +64,7 @@ def update_charts(selected_cert):
     # กราฟที่ 1: Histogram
     fig1 = px.histogram(filtered_df, x="Rating", title="การกระจายของคะแนนรีวิว",
                         template="plotly_dark", color_discrete_sequence=['#f3ce13'])
-    fig1.update_layout(xaxis_title="คะแนนรีวิว (Rating)", yaxis_title="จำนวนภาพยนตร์")
+    fig1.update_layout(xaxis_title="Rating", yaxis_title="movie count")
 
     # กราฟที่ 2: Scatter
     fig2 = px.scatter(filtered_df, x="Year", y="Rating", hover_name="Title",
@@ -72,6 +78,7 @@ def update_charts(selected_cert):
                   color=genre_avg.values,
                   color_continuous_scale='Viridis')
     fig3.update_xaxes(tickangle=0)
+    fig3.update_layout(xaxis_tickfont_size=8)
     
     # คำนวณค่าสรุป
     avg_rating = filtered_df['Rating'].mean()
