@@ -43,4 +43,11 @@ app.layout = html.Div([
             style={'color': 'black'}
         ),
     ], style={'width': '40%', 'margin': 'auto', 'padding': '20px'}),
-])
+# ส่วนพื้นที่แสดงกราฟ 3 ตัว
+    html.Div([
+        dcc.Graph(id='graph-1'), # กราฟกระจายตัวของคะแนน
+        dcc.Graph(id='graph-2'), # กราฟเทรนด์ตามปี
+        dcc.Graph(id='graph-3'), # กราฟแท่งจัดอันดับประเภทหนัง
+    ], style={'padding': '20px'})
+
+], style={'backgroundColor': '#1a1a1a', 'minHeight': '100vh'})
