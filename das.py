@@ -17,3 +17,6 @@ df = df.rename(columns={
     'Date': 'Year',
     'Name': 'Title'
 })
+
+df['Rating'] = pd.to_numeric(df['Rating'], errors='coerce')
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
