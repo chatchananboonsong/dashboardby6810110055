@@ -67,3 +67,6 @@ def update_charts(selected_cert):
     fig1 = px.histogram(filtered_df, x="Rating", title="การกระจายของคะแนนรีวิว",
                         template="plotly_dark", color_discrete_sequence=['#f3ce13'])
     return fig1
+
+if __name__ == '__main__':
+    app.run(debug=True)
