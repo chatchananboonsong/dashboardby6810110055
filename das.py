@@ -51,3 +51,10 @@ app.layout = html.Div([
     ], style={'padding': '20px'})
 
 ], style={'backgroundColor': '#1a1a1a', 'minHeight': '100vh'})
+
+@app.callback(
+    [Output('graph-1', 'figure'),
+     Output('graph-2', 'figure'),
+     Output('graph-3', 'figure')],
+    [Input('cert-dropdown', 'value')]
+)
