@@ -69,8 +69,11 @@ def update_charts(selected_cert):
     # 3. สร้างกราฟที่ 2: Scatter (ดูคะแนนตามปีที่ฉาย)
     fig2 = px.scatter(filtered_df, x="Year", y="Rating", hover_name="Title",
                       title="คะแนนรีวิวในแต่ละปี", template="plotly_dark")
+    # 4. สร้างกราฟที่ 3: Bar (10 อันดับประเภทหนังที่คะแนนเฉลี่ยสูงสุด)
+    genre_avg = filtered_df.groupby('Genre')['Rating'].mean().nlargest(10)
+    fig3 = px.bar(genre_avg, title="Top 10 ประเภทหนังคะแนนสูงสุด", template="plotly_dark")
     
-    return fig1,fig2
+    return fig1,fig2,fig3
 
 if __name__ == '__main__':
     app.run(debug=True)
