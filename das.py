@@ -20,3 +20,5 @@ df = df.rename(columns={
 
 df['Rating'] = pd.to_numeric(df['Rating'], errors='coerce')
 df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+
+df = df.dropna(subset=['Rating', 'Year', 'Certificate', 'Genre'])
